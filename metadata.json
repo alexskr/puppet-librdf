@@ -1,0 +1,54 @@
+{
+  "name": "alexskr-librdf",
+  "version": "0.1.0",
+  "author": "alexskr",
+  "summary": "compiles from source and installs librdf utils",
+  "license": "Apache-2.0",
+  "source": "https://github.com/alexskr/puppet-librdf",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.18.0 < 7.0.0"
+    },
+    {
+      "name": "puppet/archive",
+      "version_requirement": ">= 3.0.0 < 5.0.0"
+    }
+
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
+    }
+  ],
+  "pdk-version": "1.11.1",
+  "template-url": "pdk-default#1.11.1",
+  "template-ref": "1.11.1-0-g2ff8c24"
+}
