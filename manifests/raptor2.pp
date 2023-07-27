@@ -12,23 +12,22 @@
 # Sample Usage:
 #
 
-class librdf::raptor2(
-  $raptor2_ver = '2.0.15',
-  $checksum = 'a39f6c07ddb20d7dd2ff1f95fa21e2cd',
+class librdf::raptor2 (
+  String $raptor2_ver = '2.0.16',
+  String $checksum    = '0a71f13b6eaa0a04bf411083d89d7bc2',
 ) {
-
-  $librdf_url = 'http://download.librdf.org/source/'
+  $librdf_url = 'https://download.librdf.org/source/'
 
   #Packages required for compiling raptor2
   ensure_packages([
-    'gcc',
-    'make',
-    'libcurl-devel',
-    'libxml2-devel',
-    'libxslt-devel',
+      'gcc',
+      'make',
+      'libcurl-devel',
+      'libxml2-devel',
+      'libxslt-devel',
   ])
 
-  archive{ "/usr/local/src/raptor2-${raptor2_ver}.tar.gz":
+  archive { "/usr/local/src/raptor2-${raptor2_ver}.tar.gz":
     ensure        => present,
     extract       => true,
     checksum      => $checksum,
@@ -42,11 +41,11 @@ class librdf::raptor2(
   }
 
   -> file { '/usr/local/src/raptor2':
-    ensure  => symlink,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    target  => "/usr/local/src/raptor2-${raptor2_ver}",
+    ensure => symlink,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    target => "/usr/local/src/raptor2-${raptor2_ver}",
   }
 
   -> exec { './configure':
@@ -63,5 +62,4 @@ class librdf::raptor2(
     unless  => "test $(/usr/local/bin/rapper -v) = ${raptor2_ver}",
     timeout => 1200,
   }
-
 }

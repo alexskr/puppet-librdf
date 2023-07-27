@@ -11,24 +11,22 @@
 #
 # Sample Usage:
 #
-
-class librdf::rasqal(
-  $rasqal_ver = '0.9.33',
-  $checksum   = '1f5def51ca0026cd192958ef07228b52',
+class librdf::rasqal (
+  String $rasqal_ver = '0.9.33',
+  String $checksum   = '1f5def51ca0026cd192958ef07228b52',
 ) {
-
   $librdf_url = 'http://download.librdf.org/source/'
 
   require librdf::raptor2
   ensure_packages([
-    'gcc',
-    'make',
-    'libxml2-devel',
-    'mpfr-devel',
-    'pcre-devel',
+      'gcc',
+      'make',
+      'libxml2-devel',
+      'mpfr-devel',
+      'pcre-devel',
   ])
 
-  archive{ "/usr/local/src/rasqal-${rasqal_ver}.tar.gz":
+  archive { "/usr/local/src/rasqal-${rasqal_ver}.tar.gz":
     ensure        => present,
     extract       => true,
     checksum      => $checksum,
@@ -42,11 +40,11 @@ class librdf::rasqal(
   }
 
   -> file { '/usr/local/src/rasqal':
-    ensure  => symlink,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    target  => "/usr/local/src/rasqal-${rasqal_ver}",
+    ensure => symlink,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    target => "/usr/local/src/rasqal-${rasqal_ver}",
   }
 
   -> exec { './configure_rasqal':
@@ -64,5 +62,4 @@ class librdf::rasqal(
     unless  => "test $( export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig && /usr/local/bin/rasqal-config --version) = ${rasqal_ver}",
     timeout => 1200,
   }
-
 }
